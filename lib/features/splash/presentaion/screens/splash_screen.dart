@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   _goNext() async {
     Navigator.of(context)
-        .pushNamedAndRemoveUntil(Routes.loginScreenRoute, (route) => false);
+        .pushReplacementNamed(Routes.loginScreenRoute);
   }
 
   _startDelay() {

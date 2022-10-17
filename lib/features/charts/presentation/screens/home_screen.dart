@@ -64,7 +64,7 @@ class HomeScreen extends StatelessWidget {
         }
         return Form(
             key: _userFormKey,
-            // child: SingleChildScrollView(
+            child: SingleChildScrollView(
             child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 30, vertical: 50),
                 child: Column(
@@ -89,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                           },
                           text: 'Draw Chart')
                     ])
-                // )
+                )
                 ));
       },
     ));

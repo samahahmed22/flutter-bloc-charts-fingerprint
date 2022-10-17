@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/utils/asstes_maneger.dart';
 import '../../../../core/widgets/login_button.dart';
+import '../../../charts/presentation/widgets/submitButton.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -14,7 +15,7 @@ class LoginScreen extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is Authenticated) {
-          Navigator.of(context).pushNamed(Routes.homeScreenRoute);
+          Navigator.of(context).pushReplacementNamed(Routes.homeScreenRoute);
         } else if (state is BiometricsIsEnabled) {
           LoginCubit.get(context).isAuthenticated();
         } else if (state is NoBiometricFound) {
@@ -30,25 +31,26 @@ class LoginScreen extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
-          body: const Center(
-              child: Image(image: AssetImage(ImgAssets.splashLogo))),
+          body: Center(
+              child: Stack(
+            fit: StackFit.expand,
+            children: <Widget>[
+              Image(image: AssetImage(ImgAssets.splashLogo)),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom:60.0),
+                  child: SubmitButton(
+        
+                      text: 'START',
+                      onPress: () {
+                        LoginCubit.get(context).isAuthenticated();
+                      }),
+                ),
+              ),
+            ],
+          )),
         );
-        // if (state is BiometricsIsEnabled) {
-        //   return Center(
-        //     child:
-        //      LoginButton(
-        //         text: 'Authenticate',
-        //         onPress: () {
-        //           // LoginCubit.get(context).isAuthenticated();
-        //         }),
-        //   );
-        // } else if (state is NoBiometricFound) {
-        //   return Center(
-        //     child: Text(
-        //         'finger print or face id is required please enable one of them then retry'),
-        //   );
-        // }
-        // return Container();
       },
     );
   }
