@@ -1,7 +1,9 @@
+import 'package:charts/features/charts/presentation/screens/candlesticks_screen.dart';
 import 'package:charts/features/login/presentaion/cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../features/charts/presentation/cubit/charts_cubit.dart';
 import '../../features/charts/presentation/screens/home_screen.dart';
 import '../../features/login/presentaion/screens/login_screen.dart';
 import '../utils/app_strings.dart';
@@ -20,8 +22,17 @@ class AppRouter {
 
         case Routes.homeScreenRoute:
         return MaterialPageRoute(
-          builder: (_) => HomeScreen(),
-        );
+          builder: (_) => BlocProvider<ChartsCubit>(
+                create: (BuildContext context) => di.instance<ChartsCubit>(),
+                child:HomeScreen(),
+        ));
+
+        case Routes.candlesticksScreenRoute:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider<ChartsCubit>(
+                create: (BuildContext context) => di.instance<ChartsCubit>(),
+                child:CandlesticksScreen(),
+        ));
 
       default:
         return unDefinedRoute();
