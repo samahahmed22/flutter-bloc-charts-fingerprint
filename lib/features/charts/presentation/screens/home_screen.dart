@@ -61,7 +61,6 @@ class HomeScreen extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is FileDownloaded) {
-          print('############################');
         }
         return Form(
             key: _userFormKey,

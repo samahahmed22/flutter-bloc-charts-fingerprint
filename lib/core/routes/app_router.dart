@@ -6,38 +6,44 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/charts/presentation/cubit/charts_cubit.dart';
 import '../../features/charts/presentation/screens/home_screen.dart';
 import '../../features/login/presentaion/screens/login_screen.dart';
+import '../../features/splash/presentaion/screens/splash_screen.dart';
 import '../utils/app_strings.dart';
 import 'app_routes.dart';
 import '../../injection.dart' as di;
 
 class AppRouter {
+  static ChartsCubit chartsCubit = di.instance<ChartsCubit>();
   static Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
+      case Routes.splashScreenRoute:
+        return MaterialPageRoute(
+          builder: (_) => SplashScreen(),
+        );
       case Routes.loginScreenRoute:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider<LoginCubit>(
-                create: (BuildContext context) => di.instance<LoginCubit>()..isBiometricsEnabled(),
-                child:LoginScreen(),
-        ));
+            builder: (_) => BlocProvider<LoginCubit>(
+                  create: (BuildContext context) =>
+                      di.instance<LoginCubit>()..isBiometricsEnabled(),
+                  child: LoginScreen(),
+                ));
 
-        case Routes.homeScreenRoute:
+      case Routes.homeScreenRoute:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider<ChartsCubit>(
-                create: (BuildContext context) => di.instance<ChartsCubit>(),
-                child:HomeScreen(),
-        ));
+            builder: (_) => BlocProvider<ChartsCubit>.value(
+                  value: chartsCubit,
+                  child: HomeScreen(),
+                ));
 
-        case Routes.candlesticksScreenRoute:
+      case Routes.candlesticksScreenRoute:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider<ChartsCubit>(
-                create: (BuildContext context) => di.instance<ChartsCubit>(),
-                child:CandlesticksScreen(),
-        ));
+            builder: (_) => BlocProvider<ChartsCubit>.value(
+                  value: chartsCubit,
+                  child: CandlesticksScreen(),
+                ));
 
       default:
         return unDefinedRoute();
     }
-    
   }
 
   static Route<dynamic> unDefinedRoute() {

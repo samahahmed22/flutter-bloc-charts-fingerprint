@@ -40,7 +40,6 @@ class ChartsRemoteDataSourceImpl implements ChartsRemoteDataSource {
       },
     );
     if (response.statusCode == 200) {
-     print('**********************1');
       return Future.value(unit);
     } else {
       throw ServerException();
@@ -48,7 +47,6 @@ class ChartsRemoteDataSourceImpl implements ChartsRemoteDataSource {
   }
 
   Future<List<Candle>> readCandlesFromCsvFile() async {
-     print('**********************2');
     String filePath = await Constants.downloadPath + AppStrings.fileName;
     try {
       final fileString = await File(filePath).readAsString();

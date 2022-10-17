@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 class Constants {
+  static const int splashDelay = 2;
   static Future<String> get downloadPath async {
     var tempDir = await getApplicationDocumentsDirectory();
     return tempDir.path;
   }
 
-  static void showErrorDialog(
-      {required BuildContext context, required String msg}) {
+  static void showErrorDialog({
+    required BuildContext context,
+    required String msg,
+    VoidCallback? onPress,
+  }) {
     showDialog(
         context: context,
         builder: (context) => CupertinoAlertDialog(
@@ -19,7 +23,7 @@ class Constants {
               ),
               actions: [
                 TextButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: onPress ?? () => Navigator.pop(context),
                   style: TextButton.styleFrom(
                       primary: Colors.black,
                       textStyle: const TextStyle(
@@ -41,8 +45,8 @@ class Constants {
           elevation: 0,
           content: Center(
             child: CircularProgressIndicator(
-              // valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
-            ),
+                // valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+                ),
           ),
         );
       },

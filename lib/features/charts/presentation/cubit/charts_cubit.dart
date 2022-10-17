@@ -20,7 +20,6 @@ class ChartsCubit extends Cubit<ChartsState> {
   static ChartsCubit get(context) => BlocProvider.of(context);
 
   void downloadSPUSFile(DateTime from, DateTime to, String interval) async {
-    
     emit(Loading());
     Either<Failure, Unit> response = await downloadFile(from, to, interval);
     response.fold(
@@ -29,9 +28,8 @@ class ChartsCubit extends Cubit<ChartsState> {
   }
 
   void getCandlesFromDownloadedFile() async {
-    print('**********************3');
     Either<Failure, List<Candle>> response = await getCandles();
-   
+
     response.fold(
         (failure) => emit(ErrorOccurred(errorMsg: _userFailureToMsg(failure))),
         (candles) => emit(CandlesLoaded(candles)));
