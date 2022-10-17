@@ -4,7 +4,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import 'package:charts/features/charts/presentation/cubit/charts_cubit.dart';
 import 'package:charts/features/charts/presentation/widgets/drop_down_field.dart';
-import 'package:charts/features/charts/presentation/widgets/submitButton.dart';
+import 'package:charts/core/widgets/submitButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -60,37 +60,47 @@ class HomeScreen extends StatelessWidget {
         return previous != current;
       },
       builder: (context, state) {
-        if (state is FileDownloaded) {
-        }
+        if (state is FileDownloaded) {}
         return Form(
             key: _userFormKey,
             child: SingleChildScrollView(
-            child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 30, vertical: 50),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    // crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      DatePickerField('Start Date', (DateTime? from) {
-                        dateFrom = from;
-                      }),
-                      DatePickerField('End Date', (DateTime? to) {
-                        dateTo = to;
-                      }),
-                      DropDownField('Interval', _intervals,
-                          (String? selectedItem) {
-                        selectedInterval = selectedItem;
-                      }),
-                      SizedBox(height: 50),
-                      SubmitButton(
-                          onPress: () {
-                            downloadSPUSFile(context);
-                          },
-                          text: 'Draw Chart')
-                    ])
-                )
-                ));
+                child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 50),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        // crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          DatePickerField(
+                              label: 'Start Date',
+                              pickDate: (DateTime? from) {
+                                dateFrom = from;
+                              }),
+                          DatePickerField(
+                            label: 'End Date',
+                            pickDate: (DateTime? to) {
+                              dateTo = to;
+                            },
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'This field can\'t be empty!';
+                              } else if (DateTime.parse(value)
+                                  .isBefore(dateFrom!)) {
+                                return 'Please enter valid dates, \nEnd date can\'t be before start date';
+                              }
+                            },
+                          ),
+                          DropDownField('Interval', _intervals,
+                              (String? selectedItem) {
+                            selectedInterval = selectedItem;
+                          }),
+                          SizedBox(height: 50),
+                          SubmitButton(
+                              onPress: () {
+                                downloadSPUSFile(context);
+                              },
+                              text: 'Draw Chart')
+                        ]))));
       },
     ));
   }

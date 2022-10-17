@@ -4,8 +4,10 @@ import 'package:intl/intl.dart';
 class DatePickerField extends StatefulWidget {
   String label;
   final void Function(DateTime? pickedDate) pickDate;
+  final String? Function(String?)? validator;
 
-  DatePickerField(this.label, this.pickDate);
+  DatePickerField(
+      {required this.label, required this.pickDate, this.validator});
 
   @override
   _DatePickerFieldState createState() => _DatePickerFieldState();
@@ -53,11 +55,11 @@ class _DatePickerFieldState extends State<DatePickerField> {
                 onTap: () async {
                   pickDate();
                 },
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    widget.pickDate;
-                    return 'This field can\'t be empty!';
-                  }
-                })));
+                validator: widget.validator ??
+                    (value) {
+                      if (value!.isEmpty) {
+                        return 'This field can\'t be empty!';
+                      }
+                    })));
   }
 }

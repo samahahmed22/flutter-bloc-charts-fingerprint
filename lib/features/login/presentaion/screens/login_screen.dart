@@ -6,8 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/utils/asstes_maneger.dart';
-import '../../../../core/widgets/login_button.dart';
-import '../../../charts/presentation/widgets/submitButton.dart';
+import '../../../../core/widgets/submitButton.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
