@@ -1,16 +1,29 @@
-# charts
+## How to Use 
 
-A new Flutter project.
+**Step 1:**
 
-## Getting Started
+Download or clone this repo by using the link below:
 
-This project is a starting point for a Flutter application.
+``` https://github.com/samahahmed22/flutter-bloc-charts-fingerprint ```
 
-A few resources to get you started if this is your first Flutter project:
+**Step 2:**
+Go to projct root and execute following command in console :
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+`` flutter pub get ``
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**Step 3:**
+
+run the project by executing following command in console :
+
+`` flutter run ``
+
+<br />
+
+<img src="./login.jpeg" style="display: block; margin-left: auto; margin-right: auto; width: 75%;"/>
+
+<br />
+<img src="./form.jpeg" style="display: block; margin-left: auto; margin-right: auto; width: 75%;"/>
+
+<br />
+
+<img src="./chart.jpeg" style="display: block; margin-left: auto; margin-right: auto; width: 75%;"/>
