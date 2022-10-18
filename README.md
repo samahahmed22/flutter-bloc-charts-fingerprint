@@ -7,6 +7,7 @@ Download or clone this repo by using the link below:
 ``` https://github.com/samahahmed22/flutter-bloc-charts-fingerprint ```
 
 **Step 2:**
+
 Go to projct root and execute following command in console :
 
 `` flutter pub get ``
